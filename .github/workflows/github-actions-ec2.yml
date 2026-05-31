@@ -37,9 +37,13 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: us-east-1  # 👈 change to your EC2 region
+          AWS_DEFAULT_REGION: us-east-1  # 👈 CHANGE THIS TO YOUR EC2 REGION
 
-      # ---------- DEPLOYMENT STEPS (unchanged except adding optional port) ----------
+      # Wait for security group rule to propagate
+      - name: Wait for security group update
+        run: sleep 10
+
+      # ---------- DEPLOYMENT STEPS ----------
       - name: Deploy to Server 1
         uses: easingthemes/ssh-deploy@main
         env:
@@ -78,4 +82,4 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: us-east-1
+          AWS_DEFAULT_REGION: us-east-1  # 👈 CHANGE THIS TO YOUR EC2 REGION
